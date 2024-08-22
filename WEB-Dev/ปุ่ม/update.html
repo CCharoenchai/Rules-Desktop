@@ -1,0 +1,191 @@
+<script>
+    function showConfirmBox() {
+      document.getElementById('confirm-overlay').style.display = 'flex';
+    }
+    function confirmUpdate() {
+        document.getElementById('confirm-overlay').style.display = 'none';
+        update(); // เรียกใช้ฟังก์ชัน update ถ้าผู้ใช้คลิก 'ยืนยัน'
+    }
+
+    function cancelUpdate() {
+        document.getElementById('confirm-overlay').style.display = 'none'; // ซ่อนกล่องยืนยันถ้าผู้ใช้คลิก 'ยกเลิก'
+    }
+
+    function update() {
+        let txt = document.querySelector('#Search_ID').value.trim(); // ID สำหรับการค้นหา
+        let Email = document.querySelector('#Email').value.trim();
+        let Type = document.querySelector('#Type').value.trim();
+        let Priority = document.querySelector('#Priority').value.trim();
+        let Branch = document.querySelector('#Branch').value.trim(); 
+        let Province = document.querySelector('#Province').value.trim(); 
+        let Date = document.querySelector('#Date').value.trim(); 
+        let Channel = document.querySelector('#Channel').value.trim(); 
+        let Requestor = document.querySelector('#Requestor').value.trim(); 
+        let IA = document.querySelector('#IA').value.trim(); 
+        let Team = document.querySelector('#Team').value.trim(); 
+        let Owner = document.querySelector('#Owner').value.trim(); 
+        let Complaint = document.querySelector('#Complaint').value.trim(); 
+        let Description = document.querySelector('#Description').value.trim();
+        let Assign = document.querySelector('#Assign').value.trim(); 
+        let AuditObjective = document.querySelector('#AuditObjective').value.trim(); 
+        let Deadline = document.querySelector('#Deadline').value.trim(); 
+        let FieldWork = document.querySelector('#FieldWork').value.trim(); 
+        let DraftReport = document.querySelector('#DraftReport').value.trim(); 
+        let ReportReview = document.querySelector('#ReportReview').value.trim(); 
+        let FinalReport = document.querySelector('#FinalReport').value.trim(); 
+        let Notify = document.querySelector('#Notify').value.trim(); 
+        let Result = document.querySelector('#Result').value.trim(); 
+        let Issue = document.querySelector('#Issue').value.trim(); 
+
+        var sd = [txt, Email, Type, Priority, Branch, Province, Date, Channel, Requestor, IA,
+                 Team, Owner, Complaint, Description, AuditObjective, Deadline, "", "", "", "", "", "",
+                 Assign, "", "", FieldWork, "", "", DraftReport, "", "", ReportReview, "", "",
+                 FinalReport, "", "", Notify, "", Result, Issue]; // ส่งข้อมูลเป็นอาร์เรย์
+
+        let info = document.querySelector('#result'); // ดึง element ที่ใช้แสดงผลลัพธ์
+        let info2 = document.querySelector('#result2'); // ดึง element ที่ใช้แสดงผลลัพธ์
+
+        if (txt === ""){
+            info.innerHTML = "<span style='color:red'>กรุณากรอกหมายเลข ID เพื่ออัปเดตข้อมูล </span>"; // แจ้งให้กรอก ID สำหรับการอัปเดต
+            info2.innerHTML = "<span style='color:red'>กรุณากรอกหมายเลข ID เพื่ออัปเดตข้อมูล </span>"; // แจ้งให้กรอก ID สำหรับการอัปเดต
+        } else {
+            function onFailure(error) {
+                info.innerHTML = "<span style='color:red'>" + error + "</span>"; // แสดงข้อผิดพลาดเป็นสีแดง
+                info2.innerHTML = "<span style='color:red'>" + error + "</span>"; // แสดงข้อผิดพลาดเป็นสีแดง
+            };
+
+            function onSuccess(response) {
+                info.innerHTML = "<span style='color:green'>" + response + "</span>"; // แสดงข้อความสำเร็จเป็นสีเขียว
+                info2.innerHTML = "<span style='color:green'>" + response + "</span>"; // แสดงข้อความสำเร็จเป็นสีเขียว
+            };
+
+            info.innerHTML = "กำลังอัปเดตข้อมูล..."; // แสดงข้อความว่า "กำลังอัปเดตข้อมูล"
+            info2.innerHTML = "กำลังอัปเดตข้อมูล..."; // แสดงข้อความว่า "กำลังอัปเดตข้อมูล"
+
+            // เคลียร์ข้อมูลใน input elements
+            document.querySelector('#Email').value = '';
+            document.querySelector('#Type').value = '';
+            document.querySelector('#Priority').value = '';
+            document.querySelector('#Branch').value = ''; 
+            document.querySelector('#Province').value = ''; 
+            document.querySelector('#Date').value = ''; 
+            document.querySelector('#Channel').value = ''; 
+            document.querySelector('#Requestor').value = ''; 
+            document.querySelector('#IA').value = ''; 
+            document.querySelector('#Team').value = ''; 
+            document.querySelector('#Owner').value = ''; 
+            document.querySelector('#Complaint').value = ''; 
+            document.querySelector('#Description').value = '';
+            document.querySelector('#Assign').value = ''; 
+            document.querySelector('#AuditObjective').value = ''; 
+            document.querySelector('#Deadline').value = ''; 
+            document.querySelector('#FieldWork').value = ''; 
+            document.querySelector('#DraftReport').value = ''; 
+            document.querySelector('#ReportReview').value = ''; 
+            document.querySelector('#FinalReport').value = ''; 
+            document.querySelector('#Notify').value = ''; 
+            document.querySelector('#Result').value = ''; 
+            document.querySelector('#Issue').value = '';
+            
+            google.script.run.withFailureHandler(onFailure)
+                             .withSuccessHandler(onSuccess)
+                             .updateId(sd); // ส่งข้อมูลไปยังฟังก์ชัน updateId
+        }
+    }
+</script>
+
+
+<!-- <script>
+
+function confirmUpdate() {
+  var userConfirmed = confirm('คุณแน่ใจหรือไม่ว่าต้องการอัปเดตข้อมูล?');
+  if (userConfirmed) {
+      update(); // เรียกใช้ฟังก์ชัน update ถ้าผู้ใช้คลิก 'OK'
+  }
+}
+
+function update(){
+let txt = document.querySelector('#Search_ID').value.trim(); // ID สำหรับการค้นหา
+let Email = document.querySelector('#Email').value.trim();
+let Type = document.querySelector('#Type').value.trim();
+let Priority = document.querySelector('#Priority').value.trim();
+let Branch = document.querySelector('#Branch').value.trim(); 
+let Province = document.querySelector('#Province').value.trim(); 
+let Date = document.querySelector('#Date').value.trim(); 
+let Channel = document.querySelector('#Channel').value.trim(); 
+let Requestor = document.querySelector('#Requestor').value.trim(); 
+let IA = document.querySelector('#IA').value.trim(); 
+let Team = document.querySelector('#Team').value.trim(); 
+let Owner = document.querySelector('#Owner').value.trim(); 
+let Complaint = document.querySelector('#Complaint').value.trim(); 
+let Description = document.querySelector('#Description').value.trim();
+let Assign = document.querySelector('#Assign').value.trim(); 
+let AuditObjective = document.querySelector('#AuditObjective').value.trim(); 
+let Deadline = document.querySelector('#Deadline').value.trim(); 
+let FieldWork = document.querySelector('#FieldWork').value.trim(); 
+let DraftReport = document.querySelector('#DraftReport').value.trim(); 
+let ReportReview = document.querySelector('#ReportReview').value.trim(); 
+let FinalReport = document.querySelector('#FinalReport').value.trim(); 
+let Notify = document.querySelector('#Notify').value.trim(); 
+let Result = document.querySelector('#Result').value.trim(); 
+let Issue = document.querySelector('#Issue').value.trim(); 
+
+var sd = [txt, Email, Type, Priority, Branch, Province, Date, Channel, Requestor, IA,
+ Team, Owner, Complaint, Description, AuditObjective, Deadline, "", "", "", "", "", "",
+ Assign, "", "", FieldWork, "", "", DraftReport, "", "", ReportReview, "", "",
+ FinalReport, "", "", Notify, "", Result, Issue]; // ส่งข้อมูลเป็นอาร์เรย์
+
+let info = document.querySelector('#result'); // ดึง element ที่ใช้แสดงผลลัพธ์
+let info2 = document.querySelector('#result2'); // ดึง element ที่ใช้แสดงผลลัพธ์
+// ตรวจสอบว่าผู้ใช้กรอก ID หรือไม่
+if (txt === ""){
+  info.innerHTML = "<span style='color:red'>กรุณากรอกหมายเลข ID เพื่ออัปเดทข้อมูล </span>"; // แจ้งให้กรอก ID สำหรับการอัปเดต
+  info2.innerHTML = "<span style='color:red'>กรุณากรอกหมายเลข ID เพื่ออัปเดทข้อมูล </span>"; // แจ้งให้กรอก ID สำหรับการอัปเดต
+} else {
+  // ฟังก์ชันจัดการเมื่อเกิดข้อผิดพลาด
+  function onFailure(error){
+    info.innerHTML = "<span style='color:red'>" + error + "</span>"; // แสดงข้อผิดพลาดเป็นสีแดง
+    info2.innerHTML = "<span style='color:red'>" + error + "</span>"; // แสดงข้อผิดพลาดเป็นสีแดง
+  };
+
+  // ฟังก์ชันจัดการเมื่อดำเนินการสำเร็จ
+  function onSuccess(response){
+    info.innerHTML = "<span style='color:green'>" + response + "</span>"; // แสดงข้อความสำเร็จเป็นสีเขียว
+    info2.innerHTML = "<span style='color:green'>" + response + "</span>"; // แสดงข้อความสำเร็จเป็นสีเขียว
+  };
+
+  info.innerHTML = "กำลังอัปเดตข้อมูล..."; // แสดงข้อความว่า "กำลังอัปเดตข้อมูล"
+  info2.innerHTML = "กำลังอัปเดตข้อมูล..."; // แสดงข้อความว่า "กำลังอัปเดตข้อมูล"
+
+          // เคลียร์ข้อมูลใน input elements
+  document.querySelector('#Email').value = '';
+  document.querySelector('#Type').value = '';
+  document.querySelector('#Priority').value = '';
+  document.querySelector('#Branch').value = ''; 
+  document.querySelector('#Province').value = ''; 
+  document.querySelector('#Date').value = ''; 
+  document.querySelector('#Channel').value = ''; 
+  document.querySelector('#Requestor').value = ''; 
+  document.querySelector('#IA').value = ''; 
+  document.querySelector('#Team').value = ''; 
+  document.querySelector('#Owner').value = ''; 
+  document.querySelector('#Complaint').value = ''; 
+  document.querySelector('#Description').value = '';
+  document.querySelector('#Assign').value = ''; 
+  document.querySelector('#AuditObjective').value = ''; 
+  document.querySelector('#Deadline').value = ''; 
+  document.querySelector('#FieldWork').value = ''; 
+  document.querySelector('#DraftReport').value = ''; 
+  document.querySelector('#ReportReview').value = ''; 
+  document.querySelector('#FinalReport').value = ''; 
+  document.querySelector('#Notify').value = ''; 
+  document.querySelector('#Result').value = ''; 
+  document.querySelector('#Issue').value = '';
+  
+  // เรียกใช้ฟังก์ชัน updateId จาก Google Apps Script
+  google.script.run.withFailureHandler(onFailure)
+                   .withSuccessHandler(onSuccess)
+                   .updateId(sd); // ส่งข้อมูลไปยังฟังก์ชัน updateId
+}
+};
+</script> -->

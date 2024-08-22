@@ -1,0 +1,73 @@
+<script>
+    function clearAndRefresh() {
+      // เคลียร์ข้อมูลใน input elements
+      document.querySelector('#Search_ID').value = '';
+      document.querySelector('#Email').value = '';
+      document.querySelector('#Type').value = '';
+      document.querySelector('#Priority').value = '';
+      document.querySelector('#Branch').value = ''; 
+      document.querySelector('#Province').value = ''; 
+      document.querySelector('#Date').value = ''; 
+      document.querySelector('#Channel').value = ''; 
+      document.querySelector('#Requestor').value = ''; 
+      document.querySelector('#IA').value = ''; 
+      document.querySelector('#Team').value = ''; 
+      document.querySelector('#Owner').value = ''; 
+      document.querySelector('#Complaint').value = ''; 
+      document.querySelector('#Description').value = '';
+      document.querySelector('#Assign').value = ''; 
+      document.querySelector('#AuditObjective').value = ''; 
+      document.querySelector('#Deadline').value = ''; 
+      document.querySelector('#FieldWork').value = ''; 
+      document.querySelector('#DraftReport').value = ''; 
+      document.querySelector('#ReportReview').value = ''; 
+      document.querySelector('#FinalReport').value = ''; 
+      document.querySelector('#Notify').value = ''; 
+      document.querySelector('#Result').value = ''; 
+      document.querySelector('#Issue').value = '';
+        // แสดงข้อความว่า "กำลังเคลียร์ข้อมูล"
+        const info = document.querySelector('#result');
+        const info2 = document.querySelector('#result2');
+        info.innerHTML = "";
+        info2.innerHTML = "";
+
+    }
+</script>
+
+
+
+
+<!-- <script>
+function clear() {
+  const txt = document.querySelector('#Search_ID').value.trim(); // ดึงค่าจากกล่องข้อความ Search_ID
+  const info = document.querySelector('#result'); // ดึง element ที่ใช้แสดงผลลัพธ์
+  const info2 = document.querySelector('#result2'); // ดึง element ที่ใช้แสดงผลลัพธ์
+
+              // เคลียร์ข้อมูลใน input elements
+              document.querySelector('#Email').value = '';
+              document.querySelector('#Type').value = '';
+              document.querySelector('#Priority').value = '';
+              document.querySelector('#Branch').value = ''; 
+              document.querySelector('#Province').value = ''; 
+              document.querySelector('#Date').value = ''; 
+              document.querySelector('#Channel').value = ''; 
+              document.querySelector('#Requestor').value = ''; 
+              document.querySelector('#IA').value = ''; 
+              document.querySelector('#Team').value = ''; 
+              document.querySelector('#Owner').value = ''; 
+              document.querySelector('#Complaint').value = ''; 
+              document.querySelector('#Description').value = '';
+              document.querySelector('#Assign').value = ''; 
+              document.querySelector('#AuditObjective').value = ''; 
+              document.querySelector('#Deadline').value = ''; 
+              document.querySelector('#FieldWork').value = ''; 
+              document.querySelector('#DraftReport').value = ''; 
+              document.querySelector('#ReportReview').value = ''; 
+              document.querySelector('#FinalReport').value = ''; 
+              document.querySelector('#Notify').value = ''; 
+              document.querySelector('#Result').value = ''; 
+              document.querySelector('#Issue').value = '';
+  info.innerHTML = "เคลียข้อมูล..."; // แสดงข้อความว่า "กำลังอ่านข้อมูล"
+  info2.innerHTML = "เคลียข้อมูล..."; // แสดงข้อความว่า "กำลังอ่านข้อมูล"
+}
+</script> -->

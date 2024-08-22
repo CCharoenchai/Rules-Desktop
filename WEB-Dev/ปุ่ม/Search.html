@@ -1,0 +1,69 @@
+<script>
+    function read() {
+      const txt = document.querySelector('#Search_ID').value.trim(); // ดึงค่าจากกล่องข้อความ Search_ID
+      const info = document.querySelector('#result'); // ดึง element ที่ใช้แสดงผลลัพธ์
+      const info2 = document.querySelector('#result2'); // ดึง element ที่ใช้แสดงผลลัพธ์
+      
+      // ตรวจสอบว่าผู้ใช้กรอก ID หรือไม่
+      if (!txt) {
+        info.innerHTML = "<span style='color:red'> กรุณากรอกหมายเลข ID เพื่อค้นหา</span>"; // แจ้งให้กรอก ID
+        info2.innerHTML = "<span style='color:red'> กรุณากรอกหมายเลข ID เพื่อค้นหา</span>"; // แจ้งให้กรอก ID
+        return;
+      }
+      
+      // ฟังก์ชันจัดการเมื่อเกิดข้อผิดพลาด
+      function onFailure(error) {
+        info.innerHTML = `<span style='color:red'>${error}</span>`; // แสดงข้อผิดพลาดเป็นสีแดง
+        info2.innerHTML = `<span style='color:red'>${error}</span>`; // แสดงข้อผิดพลาดเป็นสีแดง
+      }
+      
+      // ฟังก์ชันจัดการเมื่อดำเนินการสำเร็จ
+      function onSuccess(response) {
+        // Update all fields at once
+        const fields = {
+          'Email': response[1],
+          'Type': response[2],
+          'Priority': response[3],
+          'Branch': response[4],
+          'Province': response[5],
+          'Date': response[6],
+          'Channel': response[7],
+          'Requestor': response[8],
+          'IA': response[9],
+          'Team': response[10],
+          'Owner': response[11],
+          'Complaint': response[12],
+          'Description': response[13],
+          'AuditObjective': response[14],
+          'Deadline': response[15],
+          'Assign': response[16],
+          'FieldWork': response[17],
+          'DraftReport': response[18],
+          'ReportReview': response[19],
+          'FinalReport': response[20],
+          'Notify': response[21],
+          'Result': response[22],
+          'Issue': response[23]
+        };
+  
+        // Update the UI
+        for (const [id, value] of Object.entries(fields)) {
+          const element = document.getElementById(id);
+          if (element) {
+            element.value = value;
+          }
+        }
+        
+        info.innerHTML = `<span style='color:green'>${response[0]}</span>`; // แสดงข้อความสำเร็จเป็นสีเขียว
+        info2.innerHTML = `<span style='color:green'>${response[0]}</span>`; // แสดงข้อความสำเร็จเป็นสีเขียว
+      }
+      
+      info.innerHTML = " กำลังค้นหาข้อมูล..."; // แสดงข้อความว่า "กำลังอ่านข้อมูล"
+      info2.innerHTML = " กำลังค้นหาข้อมูล..."; // แสดงข้อความว่า "กำลังอ่านข้อมูล"
+      
+      // เรียกใช้ฟังก์ชัน readId จาก Google Apps Script
+      google.script.run.withFailureHandler(onFailure)
+                       .withSuccessHandler(onSuccess)
+                       .readId(txt); // ส่ง ID ไปยังฟังก์ชัน readId
+    }
+  </script>
